@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from "vue"
 import Argument from './Argument.vue'
-import ResultLabel from './ResultLabel.vue'
+import BooleanLabel from './BooleanLabel.vue'
 
 const props = defineProps({
   expression: {
@@ -30,7 +30,7 @@ const expressionName = computed(() => {
     <div v-if="expression.type === 'BINARY'">
       <div class="flex items-center space-x-2">
         <div class="text-gray-400">-</div>
-        <ResultLabel :result="expression.result" />
+        <BooleanLabel :result="expression.result" />
         <Argument :argument='expression.left' />
         <div class="text-pink-500">{{ expression.operation }}</div>
         <Argument :argument='expression.right' />
@@ -40,7 +40,7 @@ const expressionName = computed(() => {
     <div v-if="['AND', 'OR'].includes(expression.type)">
       <div class="flex gap-1" :class="{ 'flex-col': expanded }">
         <a class="flex items-center gap-2 cursor-pointer" @click="toggle">
-          <ResultLabel :result="expression.result" />
+          <BooleanLabel :result="expression.result" />
           <div class="text-pink-500">{{ expressionName }}</div>
           <div class="text-gray-400">({{ expression.expressions.length }}) [</div>
           <div v-if="!expanded" class="text-xs leading-none text-gray-400 bg-gray-50 rounded p-0.5">...</div>
@@ -51,7 +51,7 @@ const expressionName = computed(() => {
           </div>
         </a>
         <div class="ml-8 flex flex-col gap-1" v-show="expanded">
-          <SpectraExpressionDebugger v-for="(subExpression, index) in expression.expressions" :expression="subExpression" :key="index" />
+          <ExpressionValidateViewer v-for="(subExpression, index) in expression.expressions" :expression="subExpression" :key="index" />
         </div>
         <a @click="toggle" class="text-gray-400">]</a>
       </div>
@@ -61,7 +61,7 @@ const expressionName = computed(() => {
       <div class="flex gap-1" :class="{ 'flex-col': expanded }">
         <a class="flex items-center gap-2 cursor-pointer" @click="toggle">
           <div class="text-gray-400">-</div>
-          <ResultLabel :result="expression.result" />
+          <BooleanLabel :result="expression.result" />
           <div class="text-pink-500">{{ expressionName }}</div>
           <div class="text-gray-400">[</div>
           <div v-if="!expanded" class="text-xs leading-none text-gray-400 bg-gray-50 rounded p-0.5">...</div>
@@ -72,10 +72,10 @@ const expressionName = computed(() => {
           </div>
         </a>
         <div class="ml-8 flex flex-col gap-1" v-show="expanded">
-          <SpectraExpressionDebugger :expression="expression.expression" />
+          <ExpressionValidateViewer :expression="expression.expression" />
         </div>
         <a @click="toggle" class="text-gray-400">]</a>
       </div>
     </div>
   </div>
-</template>
+</template>./BooleanLabel.vue

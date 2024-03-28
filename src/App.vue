@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
-import SpectraPolicyDebugger from './components/SpectraPolicyDebugger.vue'
+import PolicyValidateViewer from './components/PolicyValidateViewer.vue'
 
 const inputText = ref('')
 const policy = ref()
@@ -63,7 +63,7 @@ watch(inputText, (newVal) => {
     <div v-if="policy">
       <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Results</h2>
       <div class="flex items-center justify-between mt-8">
-        <SpectraPolicyDebugger :policy="policy" />
+        <PolicyValidateViewer :policy="policy" />
       </div>
     </div>
   </section>

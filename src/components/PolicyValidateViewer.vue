@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from "vue"
-import SpectraExpressionDebugger from "./SpectraExpressionDebugger.vue"
+import ExpressionValidateViewer from "./ExpressionValidateViewer.vue"
 
 const expand = ref(true)
 
@@ -59,7 +59,7 @@ const backgroundColor = computed(() => {
     <div class="bg-white p-4 border-t flex flex-col divide-y" v-if="policy.applied && expand" :class="[borderColor]">
       <div class="py-4">
         <slot name="prepend-expressions"></slot>
-        <SpectraExpressionDebugger :expression="policy.filter" />
+        <ExpressionValidateViewer :expression="policy.filter" />
         <slot name="append-expressions"></slot>
       </div>
       <slot>
