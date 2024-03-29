@@ -1,12 +1,12 @@
 <script setup>
 defineProps({
-  result: Boolean,
+  value: Boolean,
 })
 </script>
 <template>
   <label class="rounded px-2 py-1 text-xs leading-tight text-white" :class="{
-    'bg-green-500': result, 'bg-red-500': !result
+    'bg-green-500': value, 'bg-red-500': !value
   }">
-    {{ result ? 'true' : 'false' }}
+    {{ value ? 'true' : 'false' }}
   </label>
 </template>
