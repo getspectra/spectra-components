@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
+import PolicyBuilder from './components/PolicyBuilder.vue'
 import PolicyValidateViewer from './components/PolicyValidateViewer.vue'
 
 const inputText = ref('')
@@ -15,6 +16,19 @@ watch(inputText, (newVal) => {
   } catch (e) {
     error.value = e
   }
+})
+
+const policyBuilderTest = ref({
+  "description": "Allow if the user is an admin",
+  "effect": "allow",
+  "filter": ["user.id", '<>', 1],
+  "permissions": [
+    {
+      "description": "Allow if the user is an admin",
+      "effect": "allow",
+      "applied": true
+    }
+  ]
 })
 </script>
 
@@ -66,5 +80,9 @@ watch(inputText, (newVal) => {
         <PolicyValidateViewer :policy="policy" />
       </div>
     </div>
+  </section>
+
+  <section class="my-8 mx-auto max-w-screen-xl flex flex-col gap-4">
+    <PolicyBuilder v-model="policyBuilderTest" />
   </section>
 </template>
