@@ -1,7 +1,5 @@
-<script setup>
-defineProps({
-  value: Boolean,
-})
+<script setup lang="ts">
+defineProps<{ value: boolean }>()
 </script>
 <template>
   <label class="rounded px-2 py-1 text-xs leading-tight text-white" :class="{

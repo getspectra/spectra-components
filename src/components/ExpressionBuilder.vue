@@ -1,16 +1,11 @@
-<script setup>
-import { ref, watch } from 'vue'
-import LogicType from './LogicType.vue'
-import Operation from './Operation.vue'
+<script setup lang="ts">
+import { ref, watch } from 'vue';
+import LogicType from './LogicType.vue';
+import Operation from './Operation.vue';
 
-const expression = defineModel({ default: () => ['', '=', ''] })
-const props = defineProps({
-  deleteable: {
-    type: Boolean,
-    default: false,
-  },
-})
-const logicType = ref('simple')
+const expression = defineModel<Expression>({ default: () => ['', '=', ''] })
+
+const logicType = ref('binary')
 const expanded = ref(true)
 
 if (expression.value.and) logicType.value = 'and'
@@ -28,15 +23,15 @@ watch(logicType, (value) => {
 })
 
 const addItem = () => {
-  if (logicType.value === 'simple') return
-  if (logicType.value === 'not') return
-  expression.value[logicType.value].push(['', '=', ''])
+  if (['and', 'or'].includes(logicType.value)) {
+    expression.value[logicType.value].push(['', '=', ''])
+  }
 }
 
 const removeItem = (index) => {
-  if (logicType.value === 'simple') return
-  if (logicType.value === 'not') return
-  expression.value[logicType.value].splice(index, 1)
+  if (['and', 'or'].includes(logicType.value)) {
+    expression.value[logicType.value].splice(index, 1)
+  }
 }
 </script>
 
@@ -44,7 +39,7 @@ const removeItem = (index) => {
   <div class="flex flex-row items-start gap-2">
     <!-- simple binary -->
     <div class="flex items-start gap-4">
-      <div v-if="logicType == 'simple'" class="flex items-center gap-2">
+      <div v-if="logicType == 'binary'" class="flex items-center gap-2">
         <LogicType v-model="logicType" class="rounded" />
         <input type="text" class="block h-8 py-2 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           v-model="expression[0]" />
@@ -79,7 +74,7 @@ const removeItem = (index) => {
             </div>
           </div>
           <div class="flex items-center gap-2">
-            <slot v-if="logicType !== 'simple'"></slot>
+            <slot v-if="logicType !== 'binary'"></slot>
           </div>
         </div>
 
@@ -99,7 +94,7 @@ const removeItem = (index) => {
               </svg>
             </button>
           </ExpressionBuilder>
-          <button v-if="logicType !== 'simple'" @click="addItem"
+          <button v-if="logicType !== 'binary'" @click="addItem"
             class="inline-flex items-center text-gray-500 border border-gray-300 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded text-sm p-1.5 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
               stroke-linejoin="round">
@@ -124,6 +119,6 @@ const removeItem = (index) => {
         <ExpressionBuilder v-model="expression[logicType]" class="ml-12" />
       </div>
     </div>
-    <slot v-if="logicType == 'simple'"></slot>
+    <slot v-if="logicType == 'binary'"></slot>
   </div>
 </template>

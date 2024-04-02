@@ -1,5 +1,7 @@
-<script setup>
-const operation = defineModel({ default: '=' })
+<script setup lang="ts">
+type Operation = '=' | '!=' | '<>' | '>' | '>=' | '<' | '<=' | 'in' | 'not_in'
+
+const operation = defineModel<Operation>({ default: '=' })
 
 const operations = ['=', '!=', '<>', '>', '>=', '<', '<=', 'in', 'not_in']
 </script>

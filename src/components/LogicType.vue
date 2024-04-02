@@ -1,7 +1,7 @@
-<script setup>
-const logic = defineModel({ default: 'simple' })
+<script setup lang="ts">
+const logic = defineModel<LogicType>({ default: 'binary' })
 
-const logicTypes = ['simple', 'and', 'or', 'not']
+const logicTypes = ['binary', 'and', 'or', 'not']
 </script>
 
 <template>

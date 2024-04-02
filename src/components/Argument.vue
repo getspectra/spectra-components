@@ -1,9 +1,7 @@
-<script setup>
-import { computed } from "vue"
+<script setup lang="ts">
+import { computed } from "vue";
 
-const props = defineProps({
-  argument: Object,
-})
+const props = defineProps<{ argument: Argument }>()
 
 const displayValue = computed(() => {
   return JSON.stringify(props.argument.value)

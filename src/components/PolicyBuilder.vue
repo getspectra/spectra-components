@@ -1,5 +1,6 @@
-<script setup>
-import ExpressionBuilder from "./ExpressionBuilder.vue"
+<script setup lang="ts">
+import ExpressionBuilder from "./ExpressionBuilder.vue";
+
 const policy = defineModel({
   default: () => (
     {

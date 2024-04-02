@@ -1,7 +1,7 @@
-<script setup>
-import { ref, watch } from 'vue'
-import PolicyBuilder from './components/PolicyBuilder.vue'
-import PolicyValidateViewer from './components/PolicyValidateViewer.vue'
+<script setup lang="ts">
+import { ref, watch } from 'vue';
+import PolicyBuilder from './components/PolicyBuilder.vue';
+import PolicyValidateViewer from './components/PolicyValidateViewer.vue';
 
 const inputText = ref('')
 const policy = ref()

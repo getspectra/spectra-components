@@ -1,6 +1,6 @@
-<script setup>
-import { computed, ref } from "vue"
-import ExpressionValidateViewer from "./ExpressionValidateViewer.vue"
+<script setup lang="ts">
+import { computed, ref } from "vue";
+import ExpressionValidateViewer from "./ExpressionValidateViewer.vue";
 
 const expand = ref(true)
 

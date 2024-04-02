@@ -1,7 +1,7 @@
-<script setup>
-import { ref } from "vue"
-import Argument from './Argument.vue'
-import BooleanLabel from './BooleanLabel.vue'
+<script setup lang="ts">
+import { ref } from "vue";
+import Argument from './Argument.vue';
+import BooleanLabel from './BooleanLabel.vue';
 
 const props = defineProps({
   expression: {
